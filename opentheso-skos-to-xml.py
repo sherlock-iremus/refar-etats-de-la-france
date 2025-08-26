@@ -53,7 +53,7 @@ for uri, x in data.items():
         continue
 
     if uri not in metadata:
-        metadata[uri] = {}
+        metadata[uri] = {'id': x['http://purl.org/dc/terms/identifier'][0]['value']}
 
     # SKOS:NARROWER
     if str(SKOS.narrower) in x:
@@ -61,7 +61,6 @@ for uri, x in data.items():
             parents_to_children[uri] = []
             for narrower in x[str(SKOS.narrower)]:
                 parents_to_children[uri].append(narrower['value'])
-                metadata[uri]['id'] = x['http://purl.org/dc/terms/identifier'][0]['value']
 
     # SKOS:BROADER
     if str(SKOS.broader) in x:
@@ -84,9 +83,12 @@ for uri, x in data.items():
 
 
 def crawl(parent_element, parent_uri):
-    for child_uri in parents_to_children[uri]:
+    if parent_uri not in parents_to_children:
+        return
+    for child_uri in parents_to_children[parent_uri]:
         child_element = ET.SubElement(parent_element, "section")
         child_element.set("id", 'REFAR-' + metadata[child_uri]['id'])
+        crawl(child_element, child_uri)
 
 
 root = ET.Element("root")
