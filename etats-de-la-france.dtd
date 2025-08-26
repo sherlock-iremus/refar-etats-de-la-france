@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT root (section+)>
+<!ELEMENT section (section*)>
+<!ATTLIST section id ID #REQUIRED>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE root SYSTEM "etats-de-la-france.dtd">
+<root>
+  <section id="REFAR-293989"/>
+  <section id="REFAR-889168"/>
+  <section id="REFAR-889290"/>
+  <section id="REFAR-889291"/>
+  <section id="REFAR-institution"/>
+</root>
